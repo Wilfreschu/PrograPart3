@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Imagenes from './src/components/imagenes/imagenes';
+import Imagenes from './src/components/Imagenes/Imagenes'
+import ImagenUri from './src/components/ImagenUri/ImagenUri';
 
 
 export default function App() {
@@ -8,6 +9,7 @@ export default function App() {
     <View style={styles.container}>
       <Text style={styles.texto}>agregando imágenes</Text>
     <Imagenes />
+    <ImagenUri/>
     </View>
   );
 }

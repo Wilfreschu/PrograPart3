@@ -21,6 +21,11 @@ class DynamicForms extends Component {
                 <Pressable style={styles.button} onPress={() => this.onSubmit()}>
                       <Text style={styles.buttonText}> Enviar </Text> 
                 </Pressable>
+             <View>
+                     <Text>
+                             {this.state.comentario}
+                     </Text>
+            </View>
       </View>
     );
   }

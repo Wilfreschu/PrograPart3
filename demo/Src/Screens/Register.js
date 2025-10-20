@@ -36,6 +36,13 @@ constructor(props) {
         <Pressable style={styles.button} onPress={() => this.onSubmit()}>
               <Text style={styles.buttonText}> Registrate </Text> 
             </Pressable>
+            <View>
+              <Text>
+                {this.state.password}
+                {this.state.email}
+                {this.state.userName}
+              </Text>
+            </View>
       </View>
       
     );

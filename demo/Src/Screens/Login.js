@@ -7,7 +7,6 @@ class Login extends Component {
       this.state={
       email:"",
       password: "",
-      userName: ""
     }
   }
 
@@ -40,6 +39,12 @@ class Login extends Component {
           onPress={() => this.props.navigation.navigate('HomeMenu')}
         ><Text>Entrar a la APP</Text>
         </Pressable>
+        <View>
+              <Text>
+                        {this.state.password}
+                        {this.state.email}
+             </Text>
+         </View>
       </View>
     );
   }

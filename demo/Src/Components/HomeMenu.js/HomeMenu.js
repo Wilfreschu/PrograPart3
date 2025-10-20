@@ -13,15 +13,15 @@ class HomeMenu extends Component {
       <Tab.Navigator>
         <Tab.Screen name="Profile" component={Profile} options={{ 
             headerShown: false,
-            tabBarIcon: ({ color, size }) => (
-              <Entypo name="user" size={size} color={color} />
+            tabBarIcon: () => (
+              <Entypo name="user" size={24} color="black" />
             )
           }}
         />
         <Tab.Screen name="Home" component={Home} options={{ 
             headerShown: false,
-            tabBarIcon: ({ color, size }) => (
-              <AntDesign name="home" size={size} color={color} />
+            tabBarIcon: () => (
+              <AntDesign name="home" size={24} color="black" />
             )
           }}
         />

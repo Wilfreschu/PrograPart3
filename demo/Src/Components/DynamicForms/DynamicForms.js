@@ -1,52 +1,31 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Pressable, TextInput } from "react-native";
 
-class Login extends Component {
+class DynamicForms extends Component {
   constructor(props) {
     super(props);
       this.state={
-      email:"",
-      password: "",
-      userName: ""
+      comentario:"",
     }
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>INGRESAR</Text>
-         <TextInput style={styles.field} 
-                    keyboardType='email-address'
-                    placeholder='email'
-                    onChangeText={ text => this.setState({email:text}) }
-                    value={this.state.email} />
-                <TextInput style={styles.field} 
+        <Text style={styles.title}>HACE UN COMENTARIO</Text>
+        <TextInput style={styles.field} 
                     keyboardType='default'
-                    placeholder='password'
-                    secureTextEntry={true} 
-                    onChangeText={ text => this.setState({password:text}) }
-                    value={this.state.password}/>  
+                    placeholder='comentario'
+                    onChangeText={ text => this.setState({comentario:text}) }
+                    value={this.state.comentario}/>  
                 <Pressable style={styles.button} onPress={() => this.onSubmit()}>
-                      <Text style={styles.buttonText}> Registrate </Text> 
-                    </Pressable>
-        <Pressable
-          style={styles.blueButton}
-          onPress={() => this.props.navigation.navigate('Register')}>
-          <Text style={styles.buttonText}>No tengo cuenta</Text>
-        </Pressable>
-
-        <Pressable
-          style={styles.orangeButton}
-          onPress={() => this.props.navigation.navigate('HomeMenu')}
-        ><Text>Entrar a la APP</Text>
-        </Pressable>
+                      <Text style={styles.buttonText}> Enviar </Text> 
+                </Pressable>
       </View>
     );
   }
   onSubmit(){
-    console.log(this.state.userName)
-    console.log(this.state.password)
-   console.log(this.state.email)
+    console.log(this.state.comentario)
   }
 }
 
@@ -110,5 +89,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Login;
+export default DynamicForms;
 

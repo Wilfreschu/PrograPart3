@@ -8,7 +8,7 @@ constructor(props) {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Mi Perfil</Text>
-      <Pressable style={styles.orangeBsutton}
+      <Pressable style={styles.orangeButton}
             onPress={ ()=> this.props.navigation.navigate('Login')}>
             <Text>Salir de la app. Hacer click aqui que te lleva a login </Text>
       </Pressable>

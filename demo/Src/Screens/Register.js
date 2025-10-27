@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, FlatList, ActivityIndicator, Pressable , TextInput} from "react-native";
-import { auth } from "../../Src/firebase/config"
+import { auth,db } from "../../Src/firebase/config"
 
 class Register extends Component {
   constructor(props) {
@@ -11,21 +11,28 @@ class Register extends Component {
       userName: ""
     };
   }
-
- register(email, pass){
+register(email, pass, userName){
   auth.createUserWithEmailAndPassword(email, pass)
+    .then((response) => {
+      return db.collection('users').add({
+        email: response.user.email,          
+        nombreUsuario: userName,            
+        createdAt: Date.now()                
+      });
+    })
     .then(() => {
       this.setState({ registered: true });
       this.props.navigation.navigate('Login');
     })
-     .catch( error => {
-      this.setState({error: 'Fallo en el registro.'})
-    })
+    .catch((error) => {
+      this.setState({ error: 'Fallo en el registro.' });
+    });
 }
 
 
+
   onSubmit() {
-    this.register(this.state.email, this.state.password);
+    this.register(this.state.email, this.state.password, this.state.userName);
   }
 
   render() {

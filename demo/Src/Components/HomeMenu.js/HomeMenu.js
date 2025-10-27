@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../../Screens/Home';
 import Profile from '../../Screens/Profile';
+import Usuarios from '../../Screens/Usuarios';
+import NewPost from '../../Screens/NewPost';
 import Entypo from '@expo/vector-icons/Entypo';
 import AntDesign from '@expo/vector-icons/AntDesign';
 const Tab = createBottomTabNavigator();
@@ -22,6 +24,20 @@ class HomeMenu extends Component {
             headerShown: false,
             tabBarIcon: () => (
               <AntDesign name="home" size={24} color="black" />
+            )
+          }}
+        />
+          <Tab.Screen name="Usuarios" component={Usuarios} options={{ 
+            headerShown: false,
+            tabBarIcon: () => (
+              <AntDesign name="Usuarios" size={24} color="black" />
+            )
+          }}
+        />
+          <Tab.Screen name="Newpost" component={NewPost} options={{ 
+            headerShown: false,
+            tabBarIcon: () => (
+              <AntDesign name="Posteos" size={24} color="black" />
             )
           }}
         />

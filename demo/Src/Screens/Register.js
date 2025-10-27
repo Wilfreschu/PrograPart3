@@ -1,58 +1,86 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, FlatList, ActivityIndicator, Pressable , TextInput} from "react-native";
+import { auth } from "../../Src/firebase/config"
+
 class Register extends Component {
-constructor(props) {
+  constructor(props) {
     super(props);
-    this.state={
-      email:"",
+    this.state = {
+      email: "",
       password: "",
       userName: ""
-    }
+    };
   }
+
+ register(email, pass){
+  auth.createUserWithEmailAndPassword(email, pass)
+    .then(() => {
+      this.setState({ registered: true });
+      this.props.navigation.navigate('Login');
+    })
+     .catch( error => {
+      this.setState({error: 'Fallo en el registro.'})
+    })
+}
+
+
+  onSubmit() {
+    this.register(this.state.email, this.state.password);
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.title}>Registro</Text>
-        <Pressable style={styles.blueButton}
-            onPress={ ()=> this.props.navigation.navigate('Login')}>
-                <Text> Ya tengo cuenta </Text>
+
+        <Pressable
+          style={styles.blueButton}
+          onPress={() => this.props.navigation.navigate('Login')}
+        >
+          <Text> Ya tengo cuenta </Text>
         </Pressable>
-        <TextInput style={styles.field} 
-            keyboardType='email-address'
-            placeholder='email'
-            onChangeText={ text => this.setState({email:text}) }
-            value={this.state.email} />
-        <TextInput style={styles.field} 
-            keyboardType='default'
-            placeholder='password'
-            secureTextEntry={true} 
-            onChangeText={ text => this.setState({password:text}) }
-            value={this.state.password}/> 
-         <TextInput style={styles.field} 
-            keyboardType='default'
-            placeholder='Usuario' 
-            onChangeText={ text => this.setState({userName:text}) }
-            value={this.state.userName}/> 
+
+        <TextInput
+          style={styles.field}
+          keyboardType='email-address'
+          placeholder='email'
+          onChangeText={text => this.setState({ email: text })}
+          value={this.state.email}
+        />
+
+        <TextInput
+          style={styles.field}
+          keyboardType='default'
+          placeholder='password'
+          secureTextEntry={true}
+          onChangeText={text => this.setState({ password: text })}
+          value={this.state.password}
+        />
+
+        <TextInput
+          style={styles.field}
+          keyboardType='default'
+          placeholder='Usuario'
+          onChangeText={text => this.setState({ userName: text })}
+          value={this.state.userName}
+        />
+
         <Pressable style={styles.button} onPress={() => this.onSubmit()}>
-              <Text style={styles.buttonText}> Registrate </Text> 
-            </Pressable>
-            <View>
-              <Text>
-                {this.state.password}
-                {this.state.email}
-                {this.state.userName}
-              </Text>
-            </View>
+          <Text style={styles.buttonText}> Registrate </Text>
+        </Pressable>
+
+        <View>
+          <Text>
+            {this.state.password}
+            {this.state.email}
+            {this.state.userName}
+          </Text>
+        </View>
       </View>
-      
     );
   }
-  onSubmit(){
-    console.log(this.state.userName)
-    console.log(this.state.password)
-   console.log(this.state.email)
-  }
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

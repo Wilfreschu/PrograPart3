@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Pressable, TextInput } from "react-native";
+import { auth } from "../../Src/firebase/config"
 
 class Login extends Component {
   constructor(props) {
@@ -9,7 +10,16 @@ class Login extends Component {
       password: "",
     }
   }
-
+login(email, pass){
+   auth.signInWithEmailAndPassword(email, pass)
+    .then((response) => {
+        this.setState({loggedIn: true});
+        this.props.navigation.navigate('HomeMenu');
+    })
+     .catch( error => {
+      this.setState({error: "credenciales invalidas"})
+    })
+ }
   render() {
     return (
       <View style={styles.container}>
@@ -28,6 +38,9 @@ class Login extends Component {
                 <Pressable style={styles.button} onPress={() => this.onSubmit()}>
                       <Text style={styles.buttonText}> Registrate </Text> 
                     </Pressable>
+                    {this.state.error ? (
+                          <Text style={styles.error}>{this.state.error}</Text>
+                        ) : null}
         <Pressable
           style={styles.blueButton}
           onPress={() => this.props.navigation.navigate('Register')}>
@@ -49,9 +62,18 @@ class Login extends Component {
     );
   }
   onSubmit(){
-    console.log(this.state.userName)
-    console.log(this.state.password)
-   console.log(this.state.email)
+   if (!this.state.email.includes("@")) {
+    this.setState({ error: "El email ingresado no es válido." });
+    return;
+  }
+  if (this.state.password.length < 6) {
+    this.setState({ error: "La password debe tener una longitud mínima de 6 caracteres." });
+    return;
+  }
+
+
+
+  this.login(this.state.email, this.state.password);
   }
 }
 
@@ -112,7 +134,12 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     textAlign: "center"
+  },
+  error: {
+    color: "red",
+    marginBottom: 10
   }
+  
 });
 
 export default Login;
